@@ -24,21 +24,19 @@ public class Valid {
         LocalDate dob = LocalDate.parse(dobString, dateTimeFormatter);
         LocalDate currentDate = LocalDate.now();
         Period p = Period.between(dob, currentDate);
-//        try{
-//
-//        }catch (){
-//            System.out.println(e.getMessage());
-//        }
     }
 
-    public static Date checkValidDate(String dateStr){
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse(dateStr);
-            return date;
-        } catch (ParseException e) {
-            System.err.println("Wrong format date");
+    public static boolean checkValidDate(String dateStr){
+        try{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = dateFormat.parse(dateStr);
+            System.out.println(date);
+            System.out.println(dateFormat.format(date));
+            return true;
         }
-        return null;
+        catch (ParseException e){
+            System.err.println("something goes wrong! check date format please, bitch!");
+            return false;
+        }
     }
 }

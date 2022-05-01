@@ -1,10 +1,12 @@
 package modules;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class Person {
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private String name;
-    private String dateOfBirth;
+    private Date dateOfBirth;
     private String gender;
     private String id;
     private String phoneMobile;
@@ -14,7 +16,7 @@ public abstract class Person {
 
     }
 
-    public Person(String name, String dateOfBirth, String gender, String id, String phoneMobile, String email){
+    public Person(String name, Date dateOfBirth, String gender, String id, String phoneMobile, String email){
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -31,11 +33,11 @@ public abstract class Person {
         this.name = name;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -73,8 +75,8 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return ", " + name +
-                ", " + dateOfBirth +
+        return name +
+                ", " + simpleDateFormat.format(dateOfBirth) +
                 ", " + gender +
                 ", " + id +
                 ", " + phoneMobile +
