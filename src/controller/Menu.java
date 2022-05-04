@@ -1,9 +1,18 @@
 package controller;
 
+import services.ICustomerService;
+import services.IFacilityService;
+import services.impl.ICustomerServiceImpl;
+import services.impl.IEmployeeServiceImpl;
+import services.impl.IFacilityServiceImpl;
+
 import java.util.Scanner;
 
 public class Menu {
     Scanner input = new Scanner(System.in);
+    IEmployeeServiceImpl employeeService = new IEmployeeServiceImpl();
+    ICustomerServiceImpl customerService = new ICustomerServiceImpl();
+    IFacilityServiceImpl facilityService = new IFacilityServiceImpl();
     public void mainMenu(){
         boolean flag = true;
 
@@ -68,12 +77,15 @@ public class Menu {
                 switch (num){
                     case 1 -> {
                         System.out.println("--------* Display list employees *-----------");
+                        employeeService.display();
                     }
                     case 2 -> {
                         System.out.println("--------* Add new employee *-----------");
+                        employeeService.add();
                     }
                     case 3 -> {
                         System.out.println("--------* Edit employee *-----------");
+                        employeeService.edit();
                     }
                     case 4 -> {
                         System.out.println("--------* you returned main menu *-----------");
@@ -102,13 +114,16 @@ public class Menu {
                 int num = Integer.parseInt(input.nextLine());
                 switch (num){
                     case 1 -> {
-                        System.out.print("--------* Display list customers *-----------");
+                        System.out.println("--------* Display list customers *-----------");
+                        customerService.display();
                     }
                     case 2 -> {
                         System.out.println("--------* Add new customer *-----------");
+                        customerService.add();
                     }
                     case 3 -> {
                         System.out.println("--------* Edit customer *-----------");
+                        customerService.edit();
                     }
                     case 4 -> {
                         System.out.println("--------* You returned main menu *-----------");
@@ -138,12 +153,15 @@ public class Menu {
                 switch (num){
                     case 1 -> {
                         System.out.println("--------* Display list facilities *-----------");
+                        facilityService.display();
                     }
                     case 2 -> {
                         System.out.println("--------* Add new facility *-----------");
+                        facilityService.addMenuService();
                     }
                     case 3 -> {
                         System.out.println("--------* Display list facility maintenance *-----------");
+                        facilityService.displayMaintain();
                     }
                     case 4 -> {
                         System.out.println("--------* you have returned  main menu *-----------");

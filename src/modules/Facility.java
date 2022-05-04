@@ -4,7 +4,7 @@ public abstract class Facility {
     private String serviceCode;
     private String serviceName;
     private Double areaUse;
-    private Double feeRent;
+    private Integer feeRent;
     private Integer maximumPerson;
     private String typeOfRent;
 
@@ -12,7 +12,7 @@ public abstract class Facility {
 
     }
 
-    public Facility(String serviceCode, String serviceName, Double areaUse, Double feeRent, Integer maximumPerson, String typeOfRent){
+    public Facility(String serviceCode, String serviceName, Double areaUse, Integer feeRent, Integer maximumPerson, String typeOfRent){
         this.serviceCode = serviceCode;
         this.serviceName = serviceName;
         this.areaUse = areaUse;
@@ -45,11 +45,11 @@ public abstract class Facility {
         this.areaUse = areaUse;
     }
 
-    public Double getFeeRent() {
+    public Integer getFeeRent() {
         return feeRent;
     }
 
-    public void setFeeRent(Double feeRent) {
+    public void setFeeRent(Integer feeRent) {
         this.feeRent = feeRent;
     }
 
@@ -71,8 +71,7 @@ public abstract class Facility {
 
     @Override
     public String toString() {
-        return "Facility: " +
-                "service code= " + serviceCode +
+        return "service code= " + serviceCode +
                 ", service name= " + serviceName +
                 ", area use= " + areaUse +
                 ", fee arent= " + feeRent +

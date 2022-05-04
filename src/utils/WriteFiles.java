@@ -1,6 +1,6 @@
 package utils;
 
-import modules.Employee;
+import modules.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -32,5 +32,37 @@ public class WriteFiles {
             employeeStringList.add(String.valueOf(eList));
         }
         writeToFile(path, employeeStringList);
+    }
+
+    public static void writeToFileCustomer(String path, List<Customer> list){
+        List<String> customerStringList = new ArrayList<>();
+        for(Customer customer : list){
+            customerStringList.add(String.valueOf(customer));
+        }
+        writeToFile(path, customerStringList);
+    }
+
+    public static void writeToFileHouse(String path, List<House> list){
+        List<String> houseStringList = new ArrayList<>();
+        for(House house : list){
+            houseStringList.add(String.valueOf(house));
+        }
+        writeToFile(path, houseStringList);
+    }
+
+    public static void writeToFileVilla(String path, List<Villa> list){
+        List<String> villaStringList = new ArrayList<>();
+        for(Villa villa : list){
+            villaStringList.add(String.valueOf(villa));
+        }
+        writeToFile(path, villaStringList);
+    }
+
+    public static void writeToFileRoom(String path, List<Room> list){
+        List<String> roomStringList = new ArrayList<>();
+        for(Room room : list){
+            roomStringList.add(String.valueOf(room));
+        }
+        writeToFile(path, roomStringList);
     }
 }
