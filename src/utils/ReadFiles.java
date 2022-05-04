@@ -34,6 +34,9 @@ public class ReadFiles {
             BufferedReader br = new BufferedReader(fr);
             String line = "";
             while((line = br.readLine()) != null){
+                if(line.isEmpty()){
+                    continue;
+                }
                 str = line.split(", ");
                 employeeList.add(new Employee(str[0], Valid.checkValidDate(str[1]), str[2], str[3], str[4], str[5], str[6], str[7], str[8], Long.parseLong(str[9])));
             }
@@ -51,6 +54,9 @@ public class ReadFiles {
             BufferedReader br = new BufferedReader(fr);
             String line = "";
             while((line = br.readLine()) != null){
+                if(line.isEmpty()){
+                    continue;
+                }
                 str = line.split(", ");
                 customerList.add(new Customer(str[0], Valid.checkValidDate(str[1]), str[2], str[3], str[4], str[5], str[6], str[7], str[8]));
             }
@@ -68,8 +74,11 @@ public class ReadFiles {
             BufferedReader br = new BufferedReader(fr);
             String line = "";
             while((line = br.readLine()) != null){
+                if(line.isEmpty()){
+                    continue;
+                }
                 str = line.split(", ");
-                villaList.add(new Villa(str[0], str[1], Double.parseDouble(str[2]), Integer.parseInt(str[3]), Integer.parseInt(str[4]), str[5], str[6], Integer.parseInt(str[7]), Integer.parseInt(str[8])));
+                villaList.add(new Villa(str[0], str[1], Double.parseDouble(str[2]), Integer.parseInt(str[3]), Integer.parseInt(str[4]), str[5], str[6], Double.parseDouble(str[7]), Integer.parseInt(str[8])));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,6 +94,9 @@ public class ReadFiles {
             BufferedReader br = new BufferedReader(fr);
             String line = "";
             while((line = br.readLine()) != null){
+                if(line.isEmpty()){
+                    continue;
+                }
                 str = line.split(", ");
                 houseList.add(new House(str[0], str[1], Double.parseDouble(str[2]), Integer.parseInt(str[3]), Integer.parseInt(str[4]), str[5], str[6], Integer.parseInt(str[7])));
             }
@@ -102,6 +114,9 @@ public class ReadFiles {
             BufferedReader br = new BufferedReader(fr);
             String line = "";
             while((line = br.readLine()) != null){
+                if(line.isEmpty()){
+                    continue;
+                }
                 str = line.split(", ");
                 roomList.add(new Room(str[0], str[1], Double.parseDouble(str[2]), Integer.parseInt(str[3]), Integer.parseInt(str[4]), str[5], str[6]));
             }

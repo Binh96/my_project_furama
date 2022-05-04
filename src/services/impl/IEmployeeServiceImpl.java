@@ -27,14 +27,20 @@ public class IEmployeeServiceImpl implements IEmployeeService {
 //    }
 
     public void display(){
-        List<String> stringList = ReadFiles.readFile(path);
-        for(String str: stringList){
-            System.out.println(str);
+        employeeList = ReadFiles.readFileEmployee(path);
+        if(!employeeList.isEmpty()){
+            for(Employee employee: employeeList){
+                System.out.println(employee);
+            }
         }
+        else{
+            System.out.println("Didn't have any employee!");
+        }
+
     }
 
     public void add(){
-        ReadFiles.readFile(path);
+        employeeList = ReadFiles.readFileEmployee(path);
         System.out.print("Enter employee name:");
         String name = input.nextLine();
         System.out.print("Enter date of birth: ");
@@ -60,6 +66,7 @@ public class IEmployeeServiceImpl implements IEmployeeService {
     }
 
     public void edit(){
+        employeeList = ReadFiles.readFileEmployee(path);
         boolean check = true;
         displayId();
         System.out.print("Choose ID employee: ");
@@ -149,7 +156,7 @@ public class IEmployeeServiceImpl implements IEmployeeService {
     }
 
     public void displayId(){
-        List<Employee> stringList = ReadFiles.readFileEmployee("E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\services\\impl\\employee.csv");
+        List<Employee> stringList = ReadFiles.readFileEmployee("E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\employee.csv");
         for(Employee employee: stringList){
             System.out.println("Name employee: "+employee.getName()+", ID employee: "+ employee.getId());
         }

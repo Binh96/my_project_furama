@@ -9,14 +9,15 @@ import java.util.*;
 
 public class IFacilityServiceImpl implements IFacilityService {
     static Scanner input = new Scanner(System.in);
+    static String pathMaintain = "E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\facilityMaintain.csv";
     static String pathHouse = "E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\house.csv";
     static String pathVilla = "E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\villa.csv";
     static String pathRoom = "E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\room.csv";
-    Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
-    List<Facility> maintainFacility = new ArrayList<>();
-    List<House> houseList = new ArrayList<>();
-    List<Villa> villaList = new ArrayList<>();
-    List<Room> roomList = new ArrayList<>();
+    static Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
+    static List<Facility> maintainFacility = new ArrayList<>();
+    static List<House> houseList = new ArrayList<>();
+    static List<Villa> villaList = new ArrayList<>();
+    static List<Room> roomList = new ArrayList<>();
 
     public void addMap(Facility facility){
         Set<Facility> facilityKey = facilityIntegerMap.keySet();
@@ -46,33 +47,42 @@ public class IFacilityServiceImpl implements IFacilityService {
 
     @Override
     public void display() {
-//        System.out.println("Facility Villa: ");
-//        List<String> villas = ReadFiles.readFile(pathVilla);
-//        for(String villa : villas){
-//            System.out.println(villa);
-//        }
-//        System.out.println("Facility House: ");
-//        List<House> houses = ReadFiles.readFileHouse(pathHouse);
-//        for(House house: houses){
-//            if(houses.isEmpty()){
-//                System.out.println("Didn't have any house!");
-//            }
-//            else{
-//                System.out.println(house);
-//            }
-//        }
-//        System.out.println("Facility Room: ");
-//        List<String> rooms = ReadFiles.readFile(pathRoom);
-//        for(String room : rooms){
-//            System.out.println(room);
-//        }
+        System.out.println("Facility Villa: ");
+        List<Villa> villas = ReadFiles.readFileVilla(pathVilla);
+        for(Villa villa : villas){
+            if(villas.isEmpty()){
+                System.out.println("Didn't have any villa!");
+            }
+            else{
+                System.out.println(villa);
+            }
+        }
+        System.out.println("Facility House: ");
+        List<House> houses = ReadFiles.readFileHouse(pathHouse);
+        for(House house: houses){
+            if(houses.isEmpty()){
+                System.out.println("Didn't have any house!");
+            }
+            else{
+                System.out.println(house);
+            }
+        }
+        System.out.println("Facility Room: ");
+        List<Room> rooms = ReadFiles.readFileRoom(pathRoom);
+        for(Room room : rooms){
+            if(rooms.isEmpty()){
+                System.out.println("Didn't have any room!");
+            }
+            else{
+                System.out.println(room);
+            }
+        }
     }
 
     public void displayMaintain(){
-        for(Map.Entry<Facility, Integer> facility : facilityIntegerMap.entrySet()){
-            if(facility.getValue() <=5){
-                System.out.println(facility.getKey().getServiceName()+": "+facility.getValue());
-            }
+        List<String> maintainList = ReadFiles.readFile(pathMaintain);
+        for(String str : maintainList){
+            System.out.println(str);
         }
     }
 
@@ -115,7 +125,7 @@ public class IFacilityServiceImpl implements IFacilityService {
     }
 
     public void addNewHouse(){
-        ReadFiles.readFile("E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\files\\house.csv");
+        villaList = ReadFiles.readFileVilla("E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\house.csv");
 
         System.out.print("Enter service code: ");
         String serviceCode = input.nextLine();
@@ -177,12 +187,12 @@ public class IFacilityServiceImpl implements IFacilityService {
         Facility facility = new House(serviceCode, nameService, areaUse, feeRent, maxPerson, typeOfRent, standardRoom, numberOfFloor);
         houseList.add(house);
         this.addMap(facility);
-
+        WriteFiles.writeMapToFile(pathMaintain, facilityIntegerMap);
         WriteFiles.writeToFileHouse(pathHouse, houseList);
     }
 
     public void addNewVilla(){
-        ReadFiles.readFile("E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\files\\house.csv");
+        houseList = ReadFiles.readFileHouse("E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\villa.csv");
 
         System.out.print("Enter service code: ");
         String serviceCode = input.nextLine();
@@ -240,22 +250,23 @@ public class IFacilityServiceImpl implements IFacilityService {
             numberOfFloor = Integer.parseInt(input.nextLine());
         }
         System.out.print("Enter area pool: ");
-        Integer areaPool = Integer.parseInt(input.nextLine());
+        Double areaPool = Double.parseDouble(input.nextLine());
         while(!Valid.validInput(String.valueOf(areaPool), Valid.AREAOFPOOLANDAREAUSE_REGEX)){
             System.out.println("Try again! this time check carefully.");
             System.out.print("Enter again: ");
-            areaPool = Integer.parseInt(input.nextLine());
+            areaPool = Double.parseDouble(input.nextLine());
         }
 
         Villa villa = new Villa(serviceCode, nameService, areaUse, feeRent, maxPerson, typeOfRent, standardRoom, areaPool, numberOfFloor);
         Facility facility = new Villa(serviceCode, nameService, areaUse, feeRent, maxPerson, typeOfRent, standardRoom, areaPool, numberOfFloor);
         villaList.add(villa);
         this.addMap(facility);
+        WriteFiles.writeMapToFile(pathMaintain, facilityIntegerMap);
         WriteFiles.writeToFileVilla(pathVilla, villaList);
     }
 
     public void addNewRoom(){
-        ReadFiles.readFile("E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\files\\house.csv");
+        roomList = ReadFiles.readFileRoom("E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\room.csv");
 
         System.out.print("Enter service code: ");
         String serviceCode = input.nextLine();
@@ -310,6 +321,7 @@ public class IFacilityServiceImpl implements IFacilityService {
         Facility facility = new Room(serviceCode, nameService, areaUse, feeRent, maxPerson, typeOfRent, freeService);
         roomList.add(room);
         this.addMap(facility);
+        WriteFiles.writeMapToFile(pathMaintain, facilityIntegerMap);
         WriteFiles.writeToFileRoom(pathRoom, roomList);
     }
 
@@ -332,9 +344,8 @@ public class IFacilityServiceImpl implements IFacilityService {
                     System.out.println("Return menu add service");
                     flag = false;
                 }
-                default ->{
+                default ->
                     System.out.println("It's not an option");
-                }
             }
         }while(flag);
     }

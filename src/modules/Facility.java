@@ -1,5 +1,7 @@
 package modules;
 
+import java.util.Objects;
+
 public abstract class Facility {
     private String serviceCode;
     private String serviceName;
@@ -71,11 +73,28 @@ public abstract class Facility {
 
     @Override
     public String toString() {
-        return "service code= " + serviceCode +
-                ", service name= " + serviceName +
-                ", area use= " + areaUse +
-                ", fee arent= " + feeRent +
-                ", maximum person= " + maximumPerson +
-                ", type of rent= " + typeOfRent;
+        return serviceCode +
+                ", " + serviceName +
+                ", " + areaUse +
+                ", " + feeRent +
+                ", " + maximumPerson +
+                ", " + typeOfRent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o){
+            return true;
+        }
+        if(!(o instanceof Facility)){
+            return false;
+        }
+        Facility facility = (Facility) o;
+        return Objects.equals(serviceName, facility.serviceName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(serviceName);
     }
 }

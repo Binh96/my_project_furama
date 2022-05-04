@@ -5,8 +5,7 @@ import modules.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class WriteFiles {
     public static void writeToFile(String path, List<String> list){
@@ -65,4 +64,22 @@ public class WriteFiles {
         }
         writeToFile(path, roomStringList);
     }
+
+    public static void writeMapToFile(String path, Map<Facility, Integer> map){
+        try{
+            FileWriter fw = new FileWriter(path);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Map.Entry<Facility, Integer> mapEntry : map.entrySet()) {
+                bw.write(mapEntry.getKey().getServiceName()+": "+mapEntry.getValue());
+                bw.newLine();
+            }
+            bw.close();
+            fw.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

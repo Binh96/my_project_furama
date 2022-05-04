@@ -16,19 +16,6 @@ public class ICustomerServiceImpl implements ICustomerService {
     static Scanner input = new Scanner(System.in);
     static String path = "E:\\WorkSpace\\LearnJava\\project\\furama_manage\\src\\utils\\data\\customer.csv";
 
-//    static{
-//        Date date = new Date();
-//
-//        Customer customer1 = new Customer("Henry Bath", date, "male", "1231323123", "09876542123", "sdadad@dadadad.com", "C9090", "Diamond", "DN");
-//        Customer customer2 = new Customer("Jessy Kai", date, "female", "1223114563", "098763123123", "sdadad@vbvadadad.com", "C92390", "Gold", "UK");
-//        Customer customer3 = new Customer("Gary Kittie", date, "female", "6753123", "09876542123", "sdadad@dadadad.com", "C5670", "Diamond", "DN");
-//
-//        customerList.add(customer1);
-//        customerList.add(customer2);
-//        customerList.add(customer3);
-//
-//        WriteFiles.writeToFileCustomer(path, customerList);
-//    }
 
     @Override
     public String typeOfCustomer() {
@@ -60,7 +47,7 @@ public class ICustomerServiceImpl implements ICustomerService {
 
     @Override
     public void add() {
-        ReadFiles.readFile(path);
+        customerList = ReadFiles.readFileCustomer(path);
         System.out.print("Enter customer name:");
         String name = input.nextLine();
         System.out.print("Enter date of birth: ");
@@ -86,12 +73,12 @@ public class ICustomerServiceImpl implements ICustomerService {
 
     @Override
     public void display() {
-        List<Customer> customers = ReadFiles.readFileCustomer(path);
-        for(Customer customer: customers){
-            if(customers.isEmpty()){
-                System.out.println("Didn't have any customer!");
-            }
-            else{
+        customerList = ReadFiles.readFileCustomer(path);
+        if(customerList.isEmpty()){
+            System.out.println("Didn't have any customer!");
+        }
+        else{
+            for(Customer customer: customerList){
                 System.out.println(customer);
             }
         }
@@ -111,6 +98,7 @@ public class ICustomerServiceImpl implements ICustomerService {
 
     @Override
     public void edit() {
+        customerList = ReadFiles.readFileCustomer(path);
         boolean check = true;
         displayIdCustomer();
         System.out.print("Choose ID employee: ");
